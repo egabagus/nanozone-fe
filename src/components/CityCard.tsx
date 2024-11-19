@@ -13,11 +13,12 @@ export default function CityCard() {
     const [cities, setCities] = useState<City[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const storagePath = "http://nanozone-be.test/storage/";
+    const storagePath = import.meta.env.VITE_STORAGE_PATH;
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         axios
-        .get("http://nanozone-be.test/api/admin/cities")
+        .get(`${baseUrl}cities`)
         .then((response) => {
             setCities(response.data.data);
             setLoading(false);

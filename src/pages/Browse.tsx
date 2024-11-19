@@ -1,4 +1,3 @@
-import { Swiper } from "swiper/react";
 import CityCard from "../components/CityCard";
 import OfficeCard from "../components/OfficeCard";
 
@@ -278,9 +277,7 @@ export default function Browse() {
                 <br />
                 For Your Better Productivity.
             </h2>
-            <div className="grid grid-cols-3 gap-[30px]">
                 <OfficeCard/>
-            </div>
             </section>
             </>
     );
