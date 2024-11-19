@@ -2,8 +2,11 @@ import { useEffect, useState } from "react"
 import { City } from "../types/type";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Loader from "./utils/Loader";
+import Error from "./utils/Error";
 
-axios.defaults.headers.common['Authorization'] = `Bearer 2|zhDoCrbaCoaeNl412waggjQUwUbWOsA9v3lA4bMFbb41daf0`;
+const apiKey = import.meta.env.VITE_API_KEY;
+axios.defaults.headers.common['Authorization'] = `Bearer ${apiKey}`;
 
 export default function CityCard() {
 
@@ -25,10 +28,10 @@ export default function CityCard() {
     }, []);
 
     if (loading) {
-        return <p>Loading...</p>
+        return <Loader/>
     }
     if (error) {
-        return  <p>Error: {error}</p>
+        return  <Error/>
     }
 
     return (
