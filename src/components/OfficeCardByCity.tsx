@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import Loader from "./utils/Loader";
 import Error from "./utils/Error";
 import { formatRupiah } from "./utils/Master";
+import { useParams } from "react-router-dom";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 axios.defaults.headers.common['Authorization'] = `Bearer ${apiKey}`;
 
-export default function OfficeCard() {
+export default function OfficeCardByCity() {
 
     const [offices, setOffices] = useState<Office[]>([]);
     const [loading, setLoading] = useState(true);
@@ -16,10 +17,11 @@ export default function OfficeCard() {
     const storagePath = import.meta.env.VITE_STORAGE_PATH;
     const baseUrl = import.meta.env.VITE_API_URL;
     const appUrl = import.meta.env.VITE_BASE_URL;
+    const { slug } = useParams();
 
     useEffect(() => {
         axios
-        .get(`${baseUrl}office-spaces`)
+        .get(`${baseUrl}office-spaces/get-by-city/${slug}`)
         .then((response) => {
             setOffices(response.data.data);
             setLoading(false);
@@ -40,7 +42,7 @@ export default function OfficeCard() {
         <div className="grid grid-cols-3 gap-[30px]">
             {offices.map((office) => (
                 <div className="card" key={office.id}>
-                    <a href={`${appUrl}/city/${office.slug}`} >
+                    <a href={`${appUrl}office/${office.slug}`} >
                         <div className="flex flex-col rounded-[20px] border border-[#E0DEF7] bg-white overflow-hidden">
                             <div className="thumbnail-container relative w-full h-[200px]">
                             <p className="absolute top-5 left-5 w-fit rounded-full p-[6px_16px] bg-[#0D903A] font-bold text-sm leading-[21px] text-[#F7F7FD]">
@@ -98,7 +100,7 @@ export default function OfficeCard() {
                                 />
                                 <p className="font-semibold">
                                     {(() => {
-                                        if (office.benefits) {
+                                        if (office.benefits[0]) {
                                             return (
                                                 office.benefits[0].name
                                             )
@@ -118,7 +120,7 @@ export default function OfficeCard() {
                                 />
                                 <p className="font-semibold">
                                     {(() => {
-                                        if (office.benefits && office.benefits[1]) {
+                                        if (office.benefits[1]) {
                                             return (
                                                 office.benefits[1].name
                                             )
