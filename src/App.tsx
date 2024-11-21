@@ -8,8 +8,6 @@ import SuccessBooking from './pages/SuccessBooking'
 import CheckBooking from './pages/CheckBooking'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <BrowserRouter>
       <Routes>

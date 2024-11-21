@@ -42,3 +42,11 @@ export interface BookingDetails{
     end: string,
     office: Office,
 }
+
+export interface PaymentMethods{
+    id: number,
+    name: string,
+    desc: string,
+    thumbnail: string,
+    value: string
+}

@@ -42,7 +42,7 @@ export default function Details() {
     return (
         <>
             <Navbar/>
-            <Thumbnail photo={office?.photos}/>
+            <Thumbnail photos={office?.photos}/>
             {/* {offices.map((office) => ( */}
             <div>
             <section
